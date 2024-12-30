@@ -27,10 +27,14 @@ pub fn get_project_dir() -> Result<ProjectDirs> {
 }
 
 fn get_default_state_dir() -> Result<PathBuf> {
+    println!("{:?}",get_project_dir());
     let directory = get_project_dir()?
         .state_dir()
         .map(|d| d.to_path_buf())
-        .ok_or_else(|| eyre!("Failed to get state directory"))?;
+        .unwrap_or_else(|| {
+            // 如果获取不到state_dir，使用当前目录下的.local文件夹作为默认值
+            PathBuf::from(".local")
+        });
 
     Ok(directory)
 }

@@ -18,3 +18,5 @@ result/**/*
 #.idea/
 #
 .direnv
+.idea/
+.local/
